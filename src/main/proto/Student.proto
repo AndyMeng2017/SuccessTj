@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package firstdemo;
+
+option optimize_for=SPEED;
+option java_package="firstdemo";
+option java_outer_classname="StudentProto";
+option java_multiple_files=true;
+
+service StudentService {
+	rpc getRealname(RequestInfo) returns (ResponseInfo) {}
+}
+
+message RequestInfo {
+	string username = 1;
+}
+
+message ResponseInfo {
+	string realname = 1;
+}

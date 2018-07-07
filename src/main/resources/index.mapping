@@ -1,0 +1,102 @@
+{
+  "mappings": {
+    "trans" : 
+        { "_all": {
+            "analyzer": "ik",
+            "search_analyzer": "ik",
+            "term_vector": "no"
+        },
+          "properties" : {
+            "UUID" : {
+              "type" :    "string",
+              "index":    "not_analyzed"
+            },
+            "userGroupId" : {
+              "type" :    "string",
+              "index":    "not_analyzed"
+            },
+            "transData" : {
+              "type" :    "object",
+              "properties": {
+                    "duration":{ "type": "long" },
+                    "silenceDuration":{ "type": "long" },
+                    "silencePercent":{ "type": "float" },
+                    "speed":{ "type": "float" },
+                    "silenceList":{
+                             "type": "object",
+                             "properties": {
+                                    "startTime":    { "type": "long"  },
+                                    "endTime":    { "type": "long"  },
+                                    "duration":    { "type": "long"  }
+                             }
+                    },
+                    "emotionList":{
+                             "type": "object",
+                             "properties": {
+                                    "startTime":    { "type": "long"  },
+                                    "endTime":    { "type": "long"  },
+                                    "duration":    { "type": "long"  },
+                                    "emtionType":    { "type": "string"  }
+                             }
+                    },
+                    "sentenceList":{
+                             "type": "object",
+                             "properties": {
+                                    "startTime":    { "type": "long"  },
+                                    "endTime":    { "type": "long"  },
+                                    "duration":    { "type": "long"  },
+                                    "role":    { "type": "string"  },
+                                    "speed":    { "type": "float"  },
+                                    "content":    { "type": "string" ,"analyzer":"ik","search_analyzer":"ik" ,"term_vector": "with_positions_offsets"}
+                             }
+                    },
+                    "userContent":{ "type": "string","analyzer":"ik","search_analyzer":"ik","term_vector": "with_positions_offsets"},
+                    "agentContent":{ "type": "string","analyzer":"ik","search_analyzer":"ik","term_vector": "with_positions_offsets"},
+                    "allContent":{ "type": "string","ignore_above":10000,"analyzer":"ik","search_analyzer":"ik","term_vector": "with_positions_offsets"}
+              }
+            },
+            "relateData" : {
+              "type" :    "object",
+              "properties": {
+                    "dnis":{ "type": "string"},
+                    "ani":{ "type": "string"},
+                    "userId":{ "type": "string" ,"index": "not_analyzed"},
+                    "userName":{ "type": "string"},
+                    "path":{ "type": "string" },
+                    "callTime":{ "type": "date" ,"format" : "yyyy-MM-dd HH:mm:ss"},
+                    "indexTime":{ "type": "date" ,"format" : "yyyy-MM-dd HH:mm:ss" },
+                    "transTime":{ "type": "date" ,"format" : "yyyy-MM-dd HH:mm:ss" },
+                    "analysisTime":{ "type": "date" ,"format" : "yyyy-MM-dd HH:mm:ss" }
+              }
+            },
+            "qualityData" : {
+              "type" :    "object"
+            },
+            "manualData" : {
+              "type" :    "object",
+              "properties": {
+              		"isAssigned":{ "type": "string","index": "not_analyzed"},
+              		"isChecked":{ "type": "string","index": "not_analyzed"},
+              		"inspectResult":{"type":"object"}
+              }
+            },
+            "analysisData" : {
+              "type" :    "object"
+            }
+            ,
+             "standardSpeech" : {
+              "type" :    "object"
+            }
+            ,
+            "xmlData" : {
+              "type": "string",
+              "ignore_above":10000,
+              "analyzer":"ik",
+              "search_analyzer":"ik"
+            
+            }
+          }
+        }
+    },
+        "settings":{"index" : { "max_result_window" : 100000000}}
+}
